@@ -39,3 +39,13 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+# Add the AzureCLI task after building and pushing the image
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Azure subscription 1(1)(7fd2d34f-fe5e-4cd6-81fb-d7ef5b32c079)'
+        scriptType: 'bash' 
+        scriptLocation: 'inlineScript'
+        scriptPath: 
+        inlineScript: |
+          az webapp config container set --name chatbotwebapp --resource-group Sukwo-chatbot --docker-custom-image-name sukwochatbotfe.azurecr.io/$(imageRepository):$(tag) --docker-registry-server-url https://sukwochatbotfe.azurecr.io
+          az webapp restart --name sukwowebapp --resource-group Sukwo-chatbot
