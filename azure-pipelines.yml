@@ -48,4 +48,4 @@ stages:
         scriptPath: 
         inlineScript: |
           az webapp config container set --name chatbotwebapp --resource-group Sukwo-chatbot --docker-custom-image-name sukwochatbotfe.azurecr.io/$(imageRepository):$(tag) --docker-registry-server-url https://sukwochatbotfe.azurecr.io
-          az webapp restart --name sukwowebapp --resource-group Sukwo-chatbot
+          az webapp restart --name chatbotwebapp --resource-group Sukwo-chatbot
