@@ -19,7 +19,7 @@ variables:
   # Agent VM image nam
  
 pool:
-  name: 'sukwoAgent'
+  name: 'Default'
   vmImage: 'ubuntu-latest'  # Specify the image name for your agent if required
 
 
