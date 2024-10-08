@@ -33,16 +33,10 @@ const Navbar = () => {
               About
             </NavLink>
             <NavLink
-              to="/services"
+              to="/works"
               className="text-gray-600 hover:text-secondary-orange"
             >
-              Services
-            </NavLink>
-            <NavLink
-              to="/contact"
-              className="text-gray-600 hover:text-secondary-orange"
-            >
-              Contact
+              Works
             </NavLink>
           </div>
 
