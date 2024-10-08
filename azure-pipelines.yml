@@ -16,8 +16,12 @@ variables:
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
 
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  # Agent VM image nam
+ 
+pool:
+  name: 'Default'
+  #vmImage: 'ubuntu-latest'  # Specify the image name for your agent if required
+
 
 stages:
 - stage: Build
@@ -25,8 +29,6 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    pool:
-      vmImage: $(vmImageName)
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
@@ -37,3 +39,13 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+# Add the AzureCLI task after building and pushing the image
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'AzureServiceConnection'
+        scriptType: 'bash' 
+        scriptLocation: 'inlineScript'
+        scriptPath: 
+        inlineScript: |
+          az webapp config container set --name chatbotwebapp --resource-group Sukwo-chatbot --docker-custom-image-name cbfrontend.azurecr.io/$(imageRepository):$(tag) --docker-registry-server-url https://cbfrontend.azurecr.io
+          az webapp restart --name chatbotwebapp --resource-group Sukwo-chatbot
