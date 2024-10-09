@@ -43,13 +43,9 @@ stages:
     - task: AzureCLI@2
       inputs:
         azureSubscription: 'AzureServiceConnection'
-        scriptType: 'bash'
+        scriptType: 'bash' 
         scriptLocation: 'inlineScript'
+        scriptPath: 
         inlineScript: |
-          az webapp config container set --name chatbotwebapp \
-            --resource-group Sukwo-chatbot \
-            --container-image-name cbfrontend.azurecr.io/$(imageRepository):$(tag) \
-            --container-registry-url https://cbfrontend.azurecr.io \
-            --restart true \
-            --query "{status:properties.provisioningState}" -o tsv
-
+          az webapp config container set --name chatbotwebapp --resource-group Sukwo-chatbot --container-image-name cbfrontend.azurecr.io/$(imageRepository):$(tag) --container-registry-url https://cbfrontend.azurecr.io
+          az webapp restart --name chatbotwebapp --resource-group Sukwo-chatbot
