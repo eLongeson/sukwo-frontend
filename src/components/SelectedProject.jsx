@@ -1,9 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import IMG1 from "../assets/project-cover-1.svg";
+import { motion, useScroll } from "framer-motion";
 
-function SelectedProject({ inverse }) {
+function SelectedProject({ inverse, myImage = IMG1 }) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["0 1", "1.33 1"],
+  });
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -35,13 +40,14 @@ function SelectedProject({ inverse }) {
         inverse ? "md:flex-row-reverse" : "md:flex-row"
       } gap-7 items-center justify-between`}
       ref={sectionRef}
+      style={{ scale: scrollYProgress, opacity: scrollYProgress }}
     >
       <section
         className={`w-[60%] ${
           isVisible ? "animate-fade-down animate-fill-forwards" : "opacity-0"
         }`}
       >
-        <img src={IMG1} alt="" />
+        <img src={myImage} alt="" />
       </section>
 
       <section
@@ -59,7 +65,8 @@ function SelectedProject({ inverse }) {
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequatLorem ipsum dolor sit amet, consectetur
           adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+          magna aliqua.
+          <br /> <br /> Ut enim ad minim veniam, quis nostrud exercitation
           ullamco laboris nisi ut aliquip ex ea commodo consequatLorem ipsum
           dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

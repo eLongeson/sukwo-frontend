@@ -3,22 +3,33 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
+import Footer from "./components/Footer";
+import { useRef } from "react";
 // import ChatButton from "./components/Chat";
 
 function App() {
+  const aboutRef = useRef(null);
+  const workRef = useRef(null);
   return (
     <Router>
       <div className="relative flex-col">
-        <Navbar />
+        <Navbar aboutRef={aboutRef} workRef={workRef} />
         {/* Route definitions */}
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <Home />
-                <About />
-                <Projects />
+                <Home workRef={workRef} />
+                <section id="about" ref={aboutRef}>
+                  <About />
+                </section>
+
+                <section id="work" ref={workRef}>
+                  <Projects />
+                </section>
+
+                <Footer aboutRef={aboutRef} workRef={workRef} />
               </>
             }
           />

@@ -1,13 +1,29 @@
 import { useState } from "react";
 import Logo from "./Logo";
 import SocialLinks from "./SocialIcons";
-import { NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ aboutRef, workRef }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [active, setActive] = useState("home");
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const scrollToAbout = () => {
+    if (aboutRef.current) {
+      aboutRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToWorks = () => {
+    if (workRef.current) {
+      workRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -23,21 +39,24 @@ const Navbar = () => {
             <Logo />
           </div>
           <div className="hidden md:flex font-normal space-x-4">
-            <NavLink to="/" className="hover:text-secondary-orange">
+            <button
+              onClick={scrollToTop}
+              className={`hover:text-secondary-orange`}
+            >
               Home
-            </NavLink>
-            <NavLink
-              to="/about"
-              className="text-gray-600 hover:text-secondary-orange"
+            </button>
+            <button
+              onClick={scrollToAbout}
+              className={`text-gray-600 hover:text-secondary-orange`}
             >
               About
-            </NavLink>
-            <NavLink
-              to="/works"
-              className="text-gray-600 hover:text-secondary-orange"
+            </button>
+            <button
+              onClick={scrollToWorks}
+              className={`text-gray-600 hover:text-secondary-orange `}
             >
               Works
-            </NavLink>
+            </button>
           </div>
 
           <div className="hidden md:inline">
@@ -48,7 +67,7 @@ const Navbar = () => {
           <div className="flex items-center md:hidden">
             <button
               onClick={toggleMenu}
-              className="text-gray-600 hover:text-secondary-orange focus:outline-none"
+              className={`text-gray-600 hover:text-secondary-orange focus:outline-none`}
             >
               <svg
                 className={`h-6 w-6 transition-transform duration-300 ${
@@ -81,24 +100,18 @@ const Navbar = () => {
           <a href="/" className="text-gray-600 hover:text-secondary-orange">
             Home
           </a>
-          <a
-            href="/about"
+          <button
+            onClick={scrollToAbout}
             className="text-gray-600 hover:text-secondary-orange"
           >
             About
-          </a>
-          <a
-            href="/services"
+          </button>
+          <button
+            onClick={scrollToWorks}
             className="text-gray-600 hover:text-secondary-orange"
           >
-            Services
-          </a>
-          <a
-            href="/contact"
-            className="text-gray-600 hover:text-secondary-orange"
-          >
-            Contact
-          </a>
+            Works
+          </button>
         </div>
 
         <div>

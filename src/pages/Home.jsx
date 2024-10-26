@@ -5,7 +5,12 @@ import ButtonSolo from "../components/ButtonSolo";
 import MouseIcon from "../assets/mouse-icon.svg";
 import StarIcon from "../assets/star.svg";
 
-function Home() {
+function Home({ workRef }) {
+  const scrollToWorks = () => {
+    if (workRef.current) {
+      workRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <div
       style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -70,7 +75,10 @@ function Home() {
         </section>
 
         {/* Mouse Icon Container */}
-        <div className="absolute hidden sm:inline cursor-pointer bottom-1 left-1/2 transform -translate-x-1/2 animate-bounce -translate-y-1/2">
+        <div
+          onClick={scrollToWorks}
+          className="absolute hidden sm:inline cursor-pointer bottom-1 left-1/2 transform -translate-x-1/2 animate-bounce -translate-y-1/2"
+        >
           <img src={MouseIcon} alt="Mouse Icon" />
         </div>
       </div>
