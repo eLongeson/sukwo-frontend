@@ -13,7 +13,7 @@ function About() {
         ABOUT
       </section>
       <section className="md:text-sm lg:text-base xl:text-[18px] md:leading-[23.94px] w-full md:w-[75%] text-justify">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        Loremmm ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequatLorem ipsum dolor sit amet, consectetur adipiscing
